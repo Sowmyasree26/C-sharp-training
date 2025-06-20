@@ -24,9 +24,9 @@ namespace C_sharp_Assignment_1
             Console.WriteLine("Enter another number:");
             b = Convert.ToInt32(Console.ReadLine());
             if (a == b)
-                Console.WriteLine(a + " and " + b + "are equal");
+                Console.WriteLine(a + " and " + b + " are equal");
             else
-                Console.WriteLine(a + " and " + b + "are not equal");
+                Console.WriteLine(a + " and " + b + " are not equal");
         }
         static void problem2()
         {
