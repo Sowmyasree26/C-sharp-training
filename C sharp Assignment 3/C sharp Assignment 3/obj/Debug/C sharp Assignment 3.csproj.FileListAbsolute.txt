@@ -1,0 +1,7 @@
+C:\Users\sowmyasreea\C# training\Assignments\C sharp Assignment 3\C sharp Assignment 3\bin\Debug\C sharp Assignment 3.exe.config
+C:\Users\sowmyasreea\C# training\Assignments\C sharp Assignment 3\C sharp Assignment 3\bin\Debug\C sharp Assignment 3.exe
+C:\Users\sowmyasreea\C# training\Assignments\C sharp Assignment 3\C sharp Assignment 3\bin\Debug\C sharp Assignment 3.pdb
+C:\Users\sowmyasreea\C# training\Assignments\C sharp Assignment 3\C sharp Assignment 3\obj\Debug\C sharp Assignment 3.csproj.AssemblyReference.cache
+C:\Users\sowmyasreea\C# training\Assignments\C sharp Assignment 3\C sharp Assignment 3\obj\Debug\C sharp Assignment 3.csproj.CoreCompileInputs.cache
+C:\Users\sowmyasreea\C# training\Assignments\C sharp Assignment 3\C sharp Assignment 3\obj\Debug\C sharp Assignment 3.exe
+C:\Users\sowmyasreea\C# training\Assignments\C sharp Assignment 3\C sharp Assignment 3\obj\Debug\C sharp Assignment 3.pdb
