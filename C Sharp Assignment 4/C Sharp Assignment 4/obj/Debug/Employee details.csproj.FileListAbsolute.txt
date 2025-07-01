@@ -1,0 +1,7 @@
+C:\Users\sowmyasreea\Documents\c sharp\Employee details\Employee details\bin\Debug\Employee details.exe.config
+C:\Users\sowmyasreea\Documents\c sharp\Employee details\Employee details\bin\Debug\Employee details.exe
+C:\Users\sowmyasreea\Documents\c sharp\Employee details\Employee details\bin\Debug\Employee details.pdb
+C:\Users\sowmyasreea\Documents\c sharp\Employee details\Employee details\obj\Debug\Employee details.csproj.AssemblyReference.cache
+C:\Users\sowmyasreea\Documents\c sharp\Employee details\Employee details\obj\Debug\Employee details.csproj.CoreCompileInputs.cache
+C:\Users\sowmyasreea\Documents\c sharp\Employee details\Employee details\obj\Debug\Employee details.exe
+C:\Users\sowmyasreea\Documents\c sharp\Employee details\Employee details\obj\Debug\Employee details.pdb
