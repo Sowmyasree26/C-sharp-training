@@ -116,6 +116,7 @@ namespace C_sharp_Assignment_3
             {
                 Console.Write(i+" ");
             }
+            Console.WriteLine();
             Console.WriteLine("Result is:"+Result);
         }
     }
@@ -184,7 +185,7 @@ namespace C_sharp_Assignment_3
                 int[] Marks = new int[5];
                 Console.WriteLine("Enter Roll Number of the student:");
                 RollNo = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("EnterSemester number of the student:");
+                Console.WriteLine("Enter Semester number of the student:");
                 Semester = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Enter name of the student:");
                 Name = Console.ReadLine();
