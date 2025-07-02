@@ -1,0 +1,7 @@
+C:\Users\sowmyasreea\C# training\Assignments\C-Sharp Assigment 4\C-Sharp Assigment 4\bin\Debug\C-Sharp Assigment 4.exe.config
+C:\Users\sowmyasreea\C# training\Assignments\C-Sharp Assigment 4\C-Sharp Assigment 4\bin\Debug\C-Sharp Assigment 4.exe
+C:\Users\sowmyasreea\C# training\Assignments\C-Sharp Assigment 4\C-Sharp Assigment 4\bin\Debug\C-Sharp Assigment 4.pdb
+C:\Users\sowmyasreea\C# training\Assignments\C-Sharp Assigment 4\C-Sharp Assigment 4\obj\Debug\C-Sharp Assigment 4.csproj.AssemblyReference.cache
+C:\Users\sowmyasreea\C# training\Assignments\C-Sharp Assigment 4\C-Sharp Assigment 4\obj\Debug\C-Sharp Assigment 4.csproj.CoreCompileInputs.cache
+C:\Users\sowmyasreea\C# training\Assignments\C-Sharp Assigment 4\C-Sharp Assigment 4\obj\Debug\C-Sharp Assigment 4.exe
+C:\Users\sowmyasreea\C# training\Assignments\C-Sharp Assigment 4\C-Sharp Assigment 4\obj\Debug\C-Sharp Assigment 4.pdb
