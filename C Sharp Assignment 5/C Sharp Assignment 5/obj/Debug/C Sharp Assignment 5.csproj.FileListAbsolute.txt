@@ -1,0 +1,7 @@
+C:\Users\sowmyasreea\C# training\Assignments\C Sharp Assignment 5\C Sharp Assignment 5\bin\Debug\C Sharp Assignment 5.exe.config
+C:\Users\sowmyasreea\C# training\Assignments\C Sharp Assignment 5\C Sharp Assignment 5\bin\Debug\C Sharp Assignment 5.exe
+C:\Users\sowmyasreea\C# training\Assignments\C Sharp Assignment 5\C Sharp Assignment 5\bin\Debug\C Sharp Assignment 5.pdb
+C:\Users\sowmyasreea\C# training\Assignments\C Sharp Assignment 5\C Sharp Assignment 5\obj\Debug\C Sharp Assignment 5.csproj.AssemblyReference.cache
+C:\Users\sowmyasreea\C# training\Assignments\C Sharp Assignment 5\C Sharp Assignment 5\obj\Debug\C Sharp Assignment 5.csproj.CoreCompileInputs.cache
+C:\Users\sowmyasreea\C# training\Assignments\C Sharp Assignment 5\C Sharp Assignment 5\obj\Debug\C Sharp Assignment 5.exe
+C:\Users\sowmyasreea\C# training\Assignments\C Sharp Assignment 5\C Sharp Assignment 5\obj\Debug\C Sharp Assignment 5.pdb
