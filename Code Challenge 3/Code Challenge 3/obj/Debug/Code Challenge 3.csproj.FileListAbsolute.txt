@@ -1,0 +1,7 @@
+C:\Users\sowmyasreea\C# training\Assignments\C-sharp-training\Code Challenge 3\Code Challenge 3\bin\Debug\Code Challenge 3.exe.config
+C:\Users\sowmyasreea\C# training\Assignments\C-sharp-training\Code Challenge 3\Code Challenge 3\bin\Debug\Code Challenge 3.exe
+C:\Users\sowmyasreea\C# training\Assignments\C-sharp-training\Code Challenge 3\Code Challenge 3\bin\Debug\Code Challenge 3.pdb
+C:\Users\sowmyasreea\C# training\Assignments\C-sharp-training\Code Challenge 3\Code Challenge 3\obj\Debug\Code Challenge 3.csproj.AssemblyReference.cache
+C:\Users\sowmyasreea\C# training\Assignments\C-sharp-training\Code Challenge 3\Code Challenge 3\obj\Debug\Code Challenge 3.csproj.CoreCompileInputs.cache
+C:\Users\sowmyasreea\C# training\Assignments\C-sharp-training\Code Challenge 3\Code Challenge 3\obj\Debug\Code Challenge 3.exe
+C:\Users\sowmyasreea\C# training\Assignments\C-sharp-training\Code Challenge 3\Code Challenge 3\obj\Debug\Code Challenge 3.pdb
