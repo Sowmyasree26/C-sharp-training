@@ -1,0 +1,7 @@
+C:\Users\sowmyasreea\SQL Code Challenges\Code Challenge 1\Code challenge 4\Code challenge 4\bin\Debug\Code challenge 4.exe.config
+C:\Users\sowmyasreea\SQL Code Challenges\Code Challenge 1\Code challenge 4\Code challenge 4\bin\Debug\Code challenge 4.exe
+C:\Users\sowmyasreea\SQL Code Challenges\Code Challenge 1\Code challenge 4\Code challenge 4\bin\Debug\Code challenge 4.pdb
+C:\Users\sowmyasreea\SQL Code Challenges\Code Challenge 1\Code challenge 4\Code challenge 4\obj\Debug\Code challenge 4.csproj.AssemblyReference.cache
+C:\Users\sowmyasreea\SQL Code Challenges\Code Challenge 1\Code challenge 4\Code challenge 4\obj\Debug\Code challenge 4.csproj.CoreCompileInputs.cache
+C:\Users\sowmyasreea\SQL Code Challenges\Code Challenge 1\Code challenge 4\Code challenge 4\obj\Debug\Code challenge 4.exe
+C:\Users\sowmyasreea\SQL Code Challenges\Code Challenge 1\Code challenge 4\Code challenge 4\obj\Debug\Code challenge 4.pdb
