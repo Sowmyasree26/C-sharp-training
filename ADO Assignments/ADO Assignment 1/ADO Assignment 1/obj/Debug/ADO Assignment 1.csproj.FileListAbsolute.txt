@@ -1,0 +1,7 @@
+C:\Users\sowmyasreea\Infinite Training\ADO Assignments\ADO Assignment 1\ADO Assignment 1\bin\Debug\ADO Assignment 1.exe.config
+C:\Users\sowmyasreea\Infinite Training\ADO Assignments\ADO Assignment 1\ADO Assignment 1\bin\Debug\ADO Assignment 1.exe
+C:\Users\sowmyasreea\Infinite Training\ADO Assignments\ADO Assignment 1\ADO Assignment 1\bin\Debug\ADO Assignment 1.pdb
+C:\Users\sowmyasreea\Infinite Training\ADO Assignments\ADO Assignment 1\ADO Assignment 1\obj\Debug\ADO Assignment 1.csproj.AssemblyReference.cache
+C:\Users\sowmyasreea\Infinite Training\ADO Assignments\ADO Assignment 1\ADO Assignment 1\obj\Debug\ADO Assignment 1.csproj.CoreCompileInputs.cache
+C:\Users\sowmyasreea\Infinite Training\ADO Assignments\ADO Assignment 1\ADO Assignment 1\obj\Debug\ADO Assignment 1.exe
+C:\Users\sowmyasreea\Infinite Training\ADO Assignments\ADO Assignment 1\ADO Assignment 1\obj\Debug\ADO Assignment 1.pdb
