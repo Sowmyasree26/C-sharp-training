@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        .image-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(252 230 230);
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-container:hover .overlay {
+            opacity: 1;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="image-container">
+        <img src="C:\Users\sowmyasreea\Infinite Training\Web Technologies\Assignments\HTML Assignment 2\download.jpg" alt="Doll Image" />
+        <div class="overlay"> Cute Doll</div>
+    </div>
+
+</body>
+</html>
