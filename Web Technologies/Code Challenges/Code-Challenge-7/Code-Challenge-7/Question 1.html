@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <h2>Sample form:</h2>
+    1st Number &nbsp;&nbsp;
+    <input type="number" class="num1" />
+    <br /><br />
+    2nd Number &nbsp;&nbsp;
+    <input type="number" class="num2" />
+    <br /><br />
+
+    <button onclick="Mul()">Multiply</button>
+    <button onclick="Divi()">Divide</button>
+    <br /><br />
+
+    <p>The Result is:</p>
+    <span class="res"></span>
+
+    <script>
+        function Mul() {
+            var number_1 = document.getElementsByClassName('num1')[0].value;
+            var number_2 = document.getElementsByClassName('num2')[0].value;
+            var Mul_res = parseFloat(number_1) * parseFloat(number_2);
+            document.getElementsByClassName('res')[0].innerHTML = Mul_res;
+        }
+
+        function Divi() {
+            var number_1 = document.getElementsByClassName('num1')[0].value;
+            var number_2 = document.getElementsByClassName('num2')[0].value;
+            if (parseFloat(number_2) === 0) {
+                document.getElementsByClassName('res')[0].innerHTML = "Cannot divide by zero...";
+            } else {
+                var div = parseFloat(number_1) / parseFloat(number_2);
+                document.getElementsByClassName('res')[0].innerHTML = div;
+            }
+        }
+    </script>
+
+</body>
+</html>

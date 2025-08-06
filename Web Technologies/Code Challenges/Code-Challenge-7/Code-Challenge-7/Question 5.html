@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#id1').click(function () {
+                $('div > h1').css('background-color', 'lightpink');
+            });
+        });
+    </script>
+
+    <style>
+        #id1 {
+            margin-top: 20px;
+            padding: 13px;
+            background-color: rgb(217 213 31);
+            border: 1px solid black;
+            
+        }
+    </style>
+
+</head>
+<body>
+
+    <div>
+        <h1>I am 1<sup>st</sup> child of div</h1>
+        <p>This is a paragraph inside a div</p>
+    </div>
+    <h1>This is a heading outside a div</h1>
+    <div>
+        <h1>I am 2<sup>nd</sup> child of div</h1>
+    </div>
+    <button id="id1">Show h1 in div</button>
+
+</body>
+</html>

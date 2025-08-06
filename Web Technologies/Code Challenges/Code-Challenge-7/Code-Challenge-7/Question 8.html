@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('input').change(function () {
+                $('body').append("<p style='color:red;'>Something is typed</p>");
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <h1>Appending message</h1>
+    Input &nbsp;&nbsp;
+    <input type="text" />
+
+</body>
+</html>

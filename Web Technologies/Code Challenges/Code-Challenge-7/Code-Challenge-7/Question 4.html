@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#hideOdd').click(function () {
+                $('table tr:even').hide(); 
+            });
+        });
+    </script>
+
+    <style>
+        table {
+            border-collapse:collapse;
+            width: 50%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h2>Hide Odd Table Rows</h2>
+
+    <table border="1">
+        <tr>
+            <td>1(Odd)</td>
+        </tr>
+        <tr>
+            <td>2(Even)</td>
+        </tr>
+        <tr>
+            <td>3(Odd)</td>
+        </tr>
+        <tr>
+            <td>4(Even)</td>
+        </tr>
+        <tr>
+            <td>5(Odd)</td>
+        </tr>
+        <tr>
+            <td>6(Even)</td>
+        </tr>
+        <tr>
+            <td>7(Odd)</td>
+        </tr>
+        <tr>
+            <td>8(Even)</td>
+        </tr>
+        <tr>
+            <td>9(Odd)</td>
+        </tr>
+        <tr>
+            <td>10(Even)</td>
+        </tr>
+    </table>
+    <br />
+    <button id="hideOdd">Hide</button>
+    
+
+</body>
+</html>
