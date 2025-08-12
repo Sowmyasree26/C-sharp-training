@@ -51,20 +51,18 @@ namespace Railway_Reservation
             }
         }
 
+        public static string LastBookedPassenger = "";
         public static void BookTicket()
         {
-            Console.WriteLine("*********Available Trains*********");
+            Console.WriteLine("********* Available Trains *********");
             ShowAllTrainss();
 
-            Console.WriteLine("\n*********Enter Booking Details*********");
+            Console.WriteLine("\n********* Enter Booking Details *********");
 
             int trainNo;
             Console.Write("\nEnter Train Number: ");
             while (!int.TryParse(Console.ReadLine(), out trainNo))
                 Console.WriteLine("Please enter a valid train number.");
-
-            Console.Write("\nEnter Passenger Name: ");
-            string passengerName = Console.ReadLine();
 
             string travelClass;
             while (true)
@@ -81,19 +79,31 @@ namespace Railway_Reservation
             while (!int.TryParse(Console.ReadLine(), out berthsBooked) || berthsBooked <= 0)
                 Console.WriteLine("Please enter a valid number of berths.");
 
+            List<string> passengerNames = new List<string>();
+            for (int i = 1; i <= berthsBooked; i++)
+            {
+                Console.Write($"\nEnter name of passenger {i}: ");
+                string name = Console.ReadLine();
+                passengerNames.Add(name);
+            }
+
+            string mainPassenger = passengerNames[0]; 
+            LastBookedPassenger = mainPassenger;
+
             DateTime journeyDate;
             Console.Write("\nEnter Journey Date (yyyy-mm-dd): ");
-            while (!DateTime.TryParse(Console.ReadLine(), out journeyDate))
-                Console.WriteLine("Please enter a valid date in yyyy-mm-dd format.");
+            while (!DateTime.TryParse(Console.ReadLine(), out journeyDate) || journeyDate < DateTime.Today)
+                Console.WriteLine("Please enter a valid future date in yyyy-mm-dd format.");
 
             using (SqlConnection con = new SqlConnection(connect))
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("sp_bookticket", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-
+                SqlCommand cmd = new SqlCommand("sp_bookticket", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 cmd.Parameters.AddWithValue("@train_no", trainNo);
-                cmd.Parameters.AddWithValue("@passenger_name", passengerName);
+                cmd.Parameters.AddWithValue("@passenger_name", mainPassenger);
                 cmd.Parameters.AddWithValue("@class", travelClass);
                 cmd.Parameters.AddWithValue("@berths_booked", berthsBooked);
                 cmd.Parameters.AddWithValue("@journey_date", journeyDate);
@@ -107,10 +117,10 @@ namespace Railway_Reservation
                 try
                 {
                     cmd.ExecuteNonQuery();
-
                     if (costParam.Value != DBNull.Value && Convert.ToDouble(costParam.Value) > 0)
                     {
                         Console.WriteLine($"\nBooking successful! Total cost: Rs{costParam.Value}");
+                        ShowLatestTicket(); 
                     }
                     else
                     {
@@ -154,7 +164,7 @@ namespace Railway_Reservation
 
                     if (refund > 0)
                     {
-                        Console.WriteLine($"\nCancellation successful... Refund amount: Rs{refund}");
+                        Console.WriteLine($"\nCancellation successful... Refunded 50% amount: Rs{refund}");
                     }
                     else
                     {
@@ -179,15 +189,16 @@ namespace Railway_Reservation
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         Console.WriteLine("\nBooking Details:");
-                        Console.WriteLine("\n----------------------------------------------------------------------");
+                        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+                        Console.WriteLine($"{"Booking ID",-12} | {"Train No",-8} | {"Passenger",-20} | {"Class",-8} | {"Berths",-6} | {"Journey Date",-15} | {"Status",-10}");
+                        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
 
                         while (reader.Read())
                         {
-                            Console.WriteLine($"\nBooking ID: {reader["booking_id"]}");
-                            Console.WriteLine($"Train No: {reader["train_no"]},\t Passenger: {reader["passenger_name"]},\t Class: {reader["class"]}");
-                            Console.WriteLine($"Berths Booked: {reader["berths_booked"]},\t Journey Date: {reader["journey_date"]},\t Status: {reader["status"]}");
-                            Console.WriteLine("----------------------------------------------------------------------");
+                            Console.WriteLine($"{reader["booking_id"],-12} | {reader["train_no"],-8} | {reader["passenger_name"],-20} | {reader["class"],-8} | " +
+                                              $"{reader["berths_booked"],-6} | {Convert.ToDateTime(reader["journey_date"]).ToString("yyyy-MM-dd"),-15} | {reader["status"],-10}");
                         }
+
                     }
                 }
             }
@@ -210,17 +221,54 @@ namespace Railway_Reservation
                 SqlDataReader reader = cmd.ExecuteReader();
                 Console.WriteLine("\nAvailable Trains:");
                 Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
-                Console.WriteLine("TrainNo | TrainName | Source | Destination | 1st_AC \t| Price_1AC | 2nd_AC\t | Price_2AC | Sleeper\t | Price_Sleeper");
+                Console.WriteLine($"{"TrainNo",-8} | {"TrainName",-15} | {"Source",-10} | {"Destination",-12} | {"1st_AC",-8} | {"Price_1AC",-10} | {"2nd_AC",-8} | {"Price_2AC",-10} | {"Sleeper",-8} | {"Price_Sleeper",-13}");
                 Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
 
                 while (reader.Read())
                 {
-                    Console.WriteLine($"{reader["train_no"]}   | {reader["train_name"]}  | {reader["source"]}  | {reader["destination"]}  | " +
-                                      $"{reader["available_1ac"]}   | Rs{reader["ticket_price_1ac"]}   | {reader["available_2ac"]}   | Rs{reader["ticket_price_2ac"]}   | " +
-                                      $"{reader["available_sleeper"]}   | Rs{reader["ticket_price_sleeper"]}  ");
+                    Console.WriteLine($"{reader["train_no"],-8} | {reader["train_name"],-15} | {reader["source"],-10} | {reader["destination"],-12} | " +
+                                      $"{reader["available_1ac"],-8} | Rs{reader["ticket_price_1ac"],-9} | {reader["available_2ac"],-8} | Rs{reader["ticket_price_2ac"],-9} | " +
+                                      $"{reader["available_sleeper"],-8} | Rs{reader["ticket_price_sleeper"],-12}");
+                }
+
+            }
+        }
+
+        public static void ShowLatestTicket()
+        {
+            if (string.IsNullOrEmpty(LastBookedPassenger))
+            {
+                Console.WriteLine("\nNo recent booking found.");
+                return;
+            }
+
+            using (SqlConnection con = new SqlConnection(connect))
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT TOP 1 * FROM bookings WHERE passenger_name = @name ORDER BY booking_id DESC", con);
+                cmd.Parameters.AddWithValue("@name", LastBookedPassenger);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    Console.WriteLine("\n********** TICKET DETAILS **********");
+                    Console.WriteLine($"Booking ID     : {reader["booking_id"]}");
+                    Console.WriteLine($"Train No       : {reader["train_no"]}");
+                    Console.WriteLine($"Passenger Name : {reader["passenger_name"]}");
+                    Console.WriteLine($"Class          : {reader["class"]}");
+                    Console.WriteLine($"Berths Booked  : {reader["berths_booked"]}");
+                    Console.WriteLine($"Journey Date   : {Convert.ToDateTime(reader["journey_date"]).ToShortDateString()}");
+                    Console.WriteLine($"Status         : {reader["status"]}");
+                    Console.WriteLine($"Total Cost     : Rs{reader["total_cost"]}");
+                    Console.WriteLine("************************************");
+                }
+                else
+                {
+                    Console.WriteLine("\nNo ticket found for this passenger.");
                 }
             }
         }
+
 
     }
 }

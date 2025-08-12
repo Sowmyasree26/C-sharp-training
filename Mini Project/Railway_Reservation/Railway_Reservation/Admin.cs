@@ -117,65 +117,87 @@ namespace Railway_Reservation
             }
         }
 
-
         static void ModifyTrain()
         {
-            Console.WriteLine("\n************Available Trains**************");
+            Console.WriteLine("\n************ Available Trains **************");
             User.ShowAllTrainss();
-
-            int trainno;
-            Console.WriteLine("\nEnter train number from the above trains to modify:");
-            while (!int.TryParse(Console.ReadLine(), out trainno))
-                Console.WriteLine("Please enter a valid train number.");
-
-            Console.Write("\nEnter new Train Name: ");
-            string name = Console.ReadLine();
-
-            Console.Write("\nEnter new Source: ");
-            string source = Console.ReadLine();
-
-            Console.Write("\nEnter new Destination: ");
-            string destination = Console.ReadLine();
-
-            int first_ac_cost, second_ac_cost, sleeper_cost;
-
-            Console.WriteLine("\nEnter new ticket price in First AC:");
-            while (!int.TryParse(Console.ReadLine(), out first_ac_cost))
-                Console.WriteLine("Please enter a valid number.");
-
-            Console.WriteLine("\nEnter new ticket price in Second AC:");
-            while (!int.TryParse(Console.ReadLine(), out second_ac_cost))
-                Console.WriteLine("Please enter a valid number.");
-
-            Console.WriteLine("\nEnter new ticket price in Sleeper class:");
-            while (!int.TryParse(Console.ReadLine(), out sleeper_cost))
-                Console.WriteLine("Please enter a valid number.");
-
+            Console.Write("\nEnter Train Number to Modify: ");
+            if (!int.TryParse(Console.ReadLine(), out int trainNo))
+            {
+                Console.WriteLine("Invalid input.");
+                return;
+            }
             using (SqlConnection con = new SqlConnection(connect))
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("sp_modifytrain", con) { CommandType = CommandType.StoredProcedure };
 
-                cmd.Parameters.AddWithValue("@train_no", trainno);
-                cmd.Parameters.AddWithValue("@train_name", name);
-                cmd.Parameters.AddWithValue("@source", source);
-                cmd.Parameters.AddWithValue("@destination", destination);
-                cmd.Parameters.AddWithValue("@ticket_price_1ac", first_ac_cost);
-                cmd.Parameters.AddWithValue("@ticket_price_2ac", second_ac_cost);
-                cmd.Parameters.AddWithValue("@ticket_price_sleeper", sleeper_cost);
+                SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM trains WHERE train_no = @train_no AND isactive = 1", con);
+                checkCmd.Parameters.AddWithValue("@train_no", trainNo);
+                int exists = (int)checkCmd.ExecuteScalar();
 
+                if (exists == 0)
+                {
+                    Console.WriteLine("Invalid train number.");
+                    return;
+                }
+
+                Console.WriteLine("\nWhat do you want to update?");
+                Console.WriteLine("1. Train Name\n2. Source\n3. Destination\n4. Price for 1AC\n5. Price for 2AC\n6. Price for Sleeper");
+                Console.Write("Enter your choice: ");
+                string choice = Console.ReadLine();
+
+                string field = "", value = "";
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.Write("Enter new Train Name: ");
+                        field = "train_name";
+                        value = Console.ReadLine();
+                        break;
+                    case "2":
+                        Console.Write("Enter new Source: ");
+                        field = "source";
+                        value = Console.ReadLine();
+                        break;
+                    case "3":
+                        Console.Write("Enter new Destination: ");
+                        field = "destination";
+                        value = Console.ReadLine();
+                        break;
+                    case "4":
+                        Console.Write("Enter new Price for 1AC: ");
+                        field = "ticket_price_1ac";
+                        value = Console.ReadLine();
+                        break;
+                    case "5":
+                        Console.Write("Enter new Price for 2AC: ");
+                        field = "ticket_price_2ac";
+                        value = Console.ReadLine();
+                        break;
+                    case "6":
+                        Console.Write("Enter new Price for Sleeper: ");
+                        field = "ticket_price_sleeper";
+                        value = Console.ReadLine();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        return;
+                }
+                SqlCommand updateCmd = new SqlCommand($"UPDATE trains SET {field} = @value WHERE train_no = @train_no", con);
+                updateCmd.Parameters.AddWithValue("@value", value);
+                updateCmd.Parameters.AddWithValue("@train_no", trainNo);
                 try
                 {
-                    cmd.ExecuteNonQuery();
-                    Console.WriteLine("\nTrain details updated successfully.");
+                    updateCmd.ExecuteNonQuery();
+                    Console.WriteLine("\nTrain detail updated successfully.");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"An error occurred: {ex.Message}");
+                    Console.WriteLine($"Error: {ex.Message}");
                 }
             }
         }
-
 
         static void DeleteTrain()
         {
@@ -187,17 +209,34 @@ namespace Railway_Reservation
             using (SqlConnection con = new SqlConnection(connect))
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("sp_deletetrain", con)
-                { CommandType = CommandType.StoredProcedure };
-                cmd.Parameters.AddWithValue("@train_no", trainID);
+                SqlCommand checkCmd = new SqlCommand(
+                    "SELECT COUNT(*) FROM bookings WHERE train_no = @train_no AND status = 'booked' AND journey_date >= CAST(GETDATE() AS DATE)",
+                    con);
+                checkCmd.Parameters.AddWithValue("@train_no", trainID);
+                int bookingCount = (int)checkCmd.ExecuteScalar();
+                if (bookingCount > 0)
+                {
+                    Console.WriteLine($"\nThere are {bookingCount} future bookings for this train.");
+                    Console.Write("All bookings will be cancelled. Do you want to continue? (y/n): ");
+                    string confirm = Console.ReadLine().ToLower();
+
+                    if (confirm != "y")
+                    {
+                        Console.WriteLine("Train deletion cancelled.");
+                        return;
+                    }
+                }
+
+                SqlCommand deleteCmd = new SqlCommand("sp_deletetrain", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                deleteCmd.Parameters.AddWithValue("@train_no", trainID);
 
                 try
                 {
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                        Console.WriteLine("\nTrain deleted successfully...");
-                    else
-                        Console.WriteLine("\nTrain not found.");
+                    deleteCmd.ExecuteNonQuery();
+                    Console.WriteLine("\nTrain deleted successfully.");
                 }
                 catch (Exception ex)
                 {
@@ -205,8 +244,6 @@ namespace Railway_Reservation
                 }
             }
         }
-
-
 
     }
 }

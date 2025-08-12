@@ -59,6 +59,15 @@ values ('sowmya', '1806652')
 select *from admintable
 
 
+create table users (
+    user_id int primary key identity,
+    username varchar(50) not null unique,
+    password varchar(50) not null,
+    email varchar(100),
+    phone varchar(15)
+);
+
+
 create table cancellation (
     cancellation_id int identity primary key,
     booking_id int not null,
@@ -89,6 +98,47 @@ begin
         select 'invalid' as status;
     end
 end
+
+
+create or alter procedure sp_registeruser
+    @username varchar(50),
+    @password varchar(50),
+    @email varchar(100),
+    @phone varchar(15)
+as
+begin
+    if exists (select 1 from users where username = @username)
+    begin
+        print 'username already exists';
+        return;
+    end
+
+    insert into users (username, password, email, phone)
+    values (@username, @password, @email, @phone);
+
+    print 'registration successful';
+end;
+
+
+create or alter procedure sp_validateuser
+    @username varchar(50),
+    @password varchar(50)
+as
+begin
+    set nocount on;
+
+    if exists (
+        select 1 from users
+        where username = @username and password = @password
+    )
+    begin
+        select 'valid' as status;
+    end
+    else
+    begin
+        select 'invalid' as status;
+    end
+end;
 
 
 create or alter proc sp_addtrain
@@ -139,20 +189,51 @@ begin
 end
 
 
-create or alter proc sp_deletetrain
+create or alter procedure sp_deletetrain
     @train_no int
 as
 begin
-    update trains 
-    set isactive = 0
+    set nocount on;
+
+    if not exists (select 1 from trains where train_no = @train_no)
+    begin
+        print 'Train not found';
+        return;
+    end
+
+    if exists (
+        select 1 from bookings
+        where train_no = @train_no
+        and status = 'booked'
+        and journey_date >= cast(getdate() as date)
+    )
+    begin
+        print 'Future bookings exist for this train. All such bookings will be cancelled if you proceed.';
+        -- Let C# handle the confirmation prompt
+    end
+
+    -- Cancel only future bookings
+    update bookings
+    set status = 'cancelled'
     where train_no = @train_no
+    and status = 'booked'
+    and journey_date >= cast(getdate() as date);
 
-    if @@rowcount = 0
-        print 'Train not found'
-    else
-        print 'Train deleted successfully'
-end
+    -- Insert into cancellation table
+    insert into cancellation (booking_id, ticket_cancelled, refund_amount)
+    select booking_id, 1, total_cost * 0.5
+    from bookings
+    where train_no = @train_no
+    and status = 'cancelled'
+    and journey_date >= cast(getdate() as date);
 
+    -- Mark train as inactive
+    update trains
+    set isactive = 0
+    where train_no = @train_no;
+
+    print 'Train and all future bookings cancelled successfully.';
+end;
 
 
 create or alter proc sp_bookticket 
@@ -296,3 +377,5 @@ exec sp_showallbookings
 drop table cancellation
 drop table bookings
 drop table trains
+
+select * from users

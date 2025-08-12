@@ -13,6 +13,14 @@
 
             <asp:Button ID="btnclick" Text="click" runat="server" OnClick="btnclick" />
         </div>
+        <p>
+            Name&nbsp;&nbsp;
+            <asp:TextBox ID="TextBox1" runat="server" Width="216px"></asp:TextBox>
+&nbsp;
+        </p>
+        <p>
+            <asp:Button ID="Button1" runat="server" Text="Submit" />
+        </p>
     </form>
 </body>
 </html>
