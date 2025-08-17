@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Electricity_Project.Site1" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Electricity Billing System</title>
+    <style>
+        body {
+            font-family: 'Candara', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(162 188 248);
+        }
+
+        header {
+            background-color: rgb(14 43 190);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        nav {
+            background-color: rgb(42 85 237);
+            padding: 10px;
+            text-align: center;
+        }
+
+            nav a {
+                color: white;
+                margin: 0 15px;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                nav a:hover {
+                    text-decoration: underline;
+                }
+
+        .content {
+            padding: 40px;
+            background-color: white;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background-color: rgb(14 43 190);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header>
+            Electricity Billing System
+        </header>
+
+        <nav>
+            
+            <a href="AdminLogin.aspx">Admin Login</a>
+             <% if (Session["IsAuthenticated"] != null && (bool)Session["IsAuthenticated"]) { %>
+            <a href="BillEntry.aspx">Bill Entry</a>
+            <a href="BillRetreival.aspx">Bill Retrieval</a>
+            <% } %>
+
+        </nav>
+
+        <div class="content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+
+        <footer>
+            &copy; 2025 Electricity Board || Designed by SowmyaSree
+        </footer>
+    </form>
+</body>
+</html>
