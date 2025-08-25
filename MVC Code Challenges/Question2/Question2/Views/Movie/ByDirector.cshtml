@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Question2.Models.Movies>
+
+@{
+    ViewBag.Title = "Search Movies by Director";
+}
+
+<h2>Search Movies by Director</h2>
+
+@using (Html.BeginForm("ByDirector", "Movie", FormMethod.Get))
+{
+    <label for="director">Enter Director Name:</label>
+    <input type="text" name="director" id="director" required />
+    <input type="submit" value="Search" />
+}
+
+@if (Model != null && Model.Any())
+{
+    <h3>Results:</h3>
+    <table border="1">
+        <tr>
+            <th>Movie ID</th>
+            <th>Name</th>
+            <th>Release Date</th>
+        </tr>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Mid</td>
+                <td>@movie.Moviename</td>
+                <td>@movie.DateofRelease.ToShortDateString()</td>
+            </tr>
+        }
+    </table>
+}
+else if (Model != null)
+{
+    <p>No movies found for the given director.</p>
+}

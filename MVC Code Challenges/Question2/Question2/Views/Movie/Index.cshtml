@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Question2.Models.Movies>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Movies</h2>
+<p>@Html.ActionLink("Add New Movie", "Create")</p>
+<table border="1">
+    <tr>
+        <th>Movie ID</th>
+        <th>Name</th>
+        <th>Director</th>
+        <th>Release Date</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var movie in Model)
+    {
+        <tr>
+            <td>@movie.Mid</td>
+            <td>@movie.Moviename</td>
+            <td>@movie.DirectorName</td>
+            <td>@movie.DateofRelease.ToShortDateString()</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = movie.Mid }) |
+                @Html.ActionLink("Delete", "Delete", new { id = movie.Mid })
+            </td>
+        </tr>
+    }
+</table>
+
+
+
